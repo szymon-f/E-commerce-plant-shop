@@ -4,6 +4,7 @@ const Category = function (category) {
   this.name = category.name;
 };
 
+// Inserts newCategory into the categories table
 Category.create = (newCategory, result) => {
   const query = "INSERT INTO categories (name) VALUES (?);";
   const params = [newCategory.name];
@@ -18,6 +19,7 @@ Category.create = (newCategory, result) => {
   });
 };
 
+// Returns category data for a given category id
 Category.getByID = (id, result) => {
   const query = "SELECT * FROM categories WHERE id=?;";
   const params = [id];
@@ -31,6 +33,7 @@ Category.getByID = (id, result) => {
   });
 };
 
+// Returns category data for a given category name
 Category.getByName = (name, result) => {
   const query = "SELECT * FROM categories WHERE name LIKE ?;";
   const params = [`%${name}%`];
@@ -44,6 +47,7 @@ Category.getByName = (name, result) => {
   });
 };
 
+// Returns a list of all categories from the categories table
 Category.getAll = (result) => {
   const query = "SELECT * FROM categories;";
   db.all(query, (err, rows) => {
