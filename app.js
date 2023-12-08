@@ -2,7 +2,9 @@ const express = require('express');
 const appConfig = require('./config/app.config')
 const app = express();
 
-const towaryRouter = require('./routes/towary');
+const towaryRouter = require('./routes/produkty');
+const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 
 app.set('view engine', 'ejs');
 
@@ -10,7 +12,9 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'))
 
 // router, który zarządza podstroną z wsyztkimi towarami
-app.use('/towary', towaryRouter);
+app.use('/produkty', towaryRouter);
+app.use('/register', registerRouter);
+app.use('/login', loginRouter)
 
 app.get('/', (req, res) => {
   res.render('index')
