@@ -3,14 +3,15 @@
 
 CREATE TABLE products
   (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-   name TEXT,
-   price INTEGER,
+   name TEXT UNIQUE NOT NULL,
+   price INTEGER NOT NULL,
    description TEXT,
-   imagePath TEXT);
+   imagePath TEXT,
+   inOffer INTEGER NOT NULL);
 
 CREATE TABLE categories 
   (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-   name TEXT);
+   name TEXT UNIQUE NOT NULL);
 
 CREATE TABLE categoryProperties
   (categoryID INTEGER NOT NULL,
@@ -18,20 +19,20 @@ CREATE TABLE categoryProperties
    FOREIGN KEY(categoryID) REFERENCES categories(id));
 
 CREATE TABLE productCategories
-  (productID INTEGER NOT NULL,
+  (productID INTEGER UNIQUE NOT NULL,
    categoryID INTEGER NOT NULL,
    FOREIGN KEY(productID) REFERENCES products(id),
    FOREIGN KEY(categoryID) REFERENCES categories(id));
 
 CREATE TABLE productProperties
   (productID INTEGER NOT NULL,
-   propertyName TEXT,
-   propertyValue TEXT,
+   propertyName TEXT NOT NULL,
+   propertyValue TEXT NOT NULL,
    FOREIGN KEY(productID) REFERENCES products(id));
 
-INSERT INTO products (name, price, description, imagePath) VALUES ('Hiacynt', 700, 'Ten kwiat ma niezwykle okazałe kwiatostany, wysokości nawet 30cm, wydzielające intensywny i oryginaly zapach.', '');
-INSERT INTO products (name, price, description, imagePath) VALUES ('Chryzantema', 1500, 'Opis chryzantem. Chryzantemy złociste są najlepsze.', '');
-INSERT INTO products (name, price, description, imagePath) VALUES ('Doniczka Ratolla Round', 998, 'Piękna biała doniczka, idealna na parapet.', '');
+INSERT INTO products (name, price, description, imagePath, inOffer) VALUES ('Hiacynt', 700, 'Ten kwiat ma niezwykle okazałe kwiatostany, wysokości nawet 30cm, wydzielające intensywny i oryginaly zapach.', '', 1);
+INSERT INTO products (name, price, description, imagePath, inOffer) VALUES ('Chryzantema', 1500, 'Opis chryzantem. Chryzantemy złociste są najlepsze.', '', 1);
+INSERT INTO products (name, price, description, imagePath, inOffer) VALUES ('Doniczka Ratolla Round', 998, 'Piękna biała doniczka, idealna na parapet.', '', 1);
 
 INSERT INTO categories (name) VALUES ('Kwiaty');
 INSERT INTO categories (name) VALUES ('Doniczki');

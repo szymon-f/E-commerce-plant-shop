@@ -5,18 +5,20 @@ const Product = function (product) {
   this.price = product.price;
   this.description = product.description;
   this.imagePath = product.imagePath;
+  this.inOffer = product.inOffer;
 };
 
 //NOTE: result is a function with a signature: (err, data) => ...
 // Inserts newProduct into the products table
 Product.create = (newProduct, result) => {
   const query =
-    "INSERT INTO products (name, price, description, imagePath) VALUES (?,?,?,?);";
+    "INSERT INTO products (name, price, description, imagePath, inOffer) VALUES (?,?,?,?,?);";
   const params = [
     newProduct.name,
     newProduct.price,
     newProduct.description,
     newProduct.imagePath,
+    newProduct.inOffer
   ];
   db.run(query, params, function (err, res) {
     if (err) {
