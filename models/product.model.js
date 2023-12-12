@@ -18,7 +18,7 @@ Product.create = (newProduct, result) => {
     newProduct.price,
     newProduct.description,
     newProduct.imagePath,
-    newProduct.inOffer
+    newProduct.inOffer,
   ];
   db.run(query, params, function (err, res) {
     if (err) {
@@ -102,6 +102,70 @@ Product.getAll = (result) => {
       return;
     }
     result(null, rows);
+  });
+};
+
+// updates a product column with a given newValue
+// columns are: 'name', 'price', 'description', 'imagePath', 'inOffer'
+Product.update = (productID, column, newValue, result) => {
+  const queries = {
+    name: "UPDATE products SET name=? WHERE productID=?;",
+    price: "UPDATE products SET price=? WHERE productID=?;",
+    description: "UPDATE products SET description=? WHERE productID=?;",
+    imagePath: "UPDATE products SET imagePath=? WHERE productID=?;",
+    inOffer: "UPDATE products SET inOffer=? WHERE productID=?;",
+  };
+  const errMessages = {
+    name: [
+      "Error while updating product name: ",
+      "Trying to update a product name for a productID, that doesn't exist",
+    ],
+    price: [
+      "Error while updating product price: ",
+      "Trying to update a product price for a productID, that doesn't exist",
+    ],
+    description: [
+      "Error while updating product description: ",
+      "Trying to update product description for a productID, that doesn't exist",
+    ],
+    imagePath: [
+      "Error while updating product imagePath: ",
+      "Trying to update product image path for a productID, that doesn't exist",
+    ],
+    inOffer: [
+      "Error while updating product inOffer: ",
+      "Trying to update product inOffer for a productID, that doesn't exist",
+    ],
+  };
+  const query = queries[column];
+  const params = [newValue, productID];
+  db.run(query, params, function (err, res) {
+    if (err) {
+      console.error(errMessages[column][0], err.message);
+      result(err, null);
+      return;
+    }
+    if (this.changes == 0) {
+      console.error(errMessages[column][1]);
+      result({ kind: "not_found", message: "productID not found" }, null);
+      return;
+    }
+    result(null, newValue);
+  });
+};
+
+// deletes a product for a given productID
+Product.deleteProduct = (productID, result) => {
+  const query = "DELETE FROM products WHERE productID=?;";
+  const params = [productID];
+  db.run(query, params, function (err, res) {
+    if (err) {
+      console.error("Error while deleting a product: ", err.message);
+      result(err, null);
+      return;
+    }
+    console.log(`Deleted product with productID ${productID}`);
+    result(null, productID);
   });
 };
 
