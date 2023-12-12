@@ -60,4 +60,38 @@ Category.getAll = (result) => {
   });
 };
 
+Category.updateName = (categoryID, newName, result) => {
+  const query = "UPDATE categories SET name=? WHERE categoryID=?;";
+  const params = [newName, categoryID];
+  db.run(query, params, function (err, res) {
+    if (err) {
+      console.error("Error while trying to update category name");
+      result(err, null);
+      return;
+    }
+    if (this.changes == 0) {
+      console.error(
+        "Trying to update a category name for a categoryID, that doesn't exist"
+      );
+      result({ kind: "not_found", message: "catgoryID not found" });
+      return;
+    }
+    result(null, newName);
+  });
+};
+
+Category.deleteCategory = (categoryID, result) => {
+  const query = "DELETE FROM category WHERE categoryID=?;";
+  const params = [categoryID];
+  db.run(query, params, function (err, res) {
+    if (err) {
+      console.error("Error while deleting a category: ", err.message);
+      result(err, null);
+      return;
+    }
+    console.log(`Deleted category with categoryID ${categoryID}`);
+    result(null, categoryID);
+  });
+};
+
 module.exports = Category;
