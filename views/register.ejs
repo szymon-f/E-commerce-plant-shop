@@ -9,12 +9,14 @@
 <body>
     <div class="registration-container">
 
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>Something went wrong!</strong> You should check in on some of those fields below.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+        <%  for (const [key, value] of Object.entries(locals.messages)) { %>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong><%= key %></strong> <%= value %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+        <% } %>
 
         <form action="#" method="post" class="registration-form">
             <h2>Registration</h2>

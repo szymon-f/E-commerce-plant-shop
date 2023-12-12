@@ -2,19 +2,34 @@ const express = require('express');
 const appConfig = require('./config/app.config')
 const app = express();
 
+const flash = require('connect-flash')
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+
+
 const towaryRouter = require('./routes/produkty');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
 
 app.set('view engine', 'ejs');
 
-// to mówi expressowi, żeby uznał folder /public za ten ze statycznymi plikami
-app.use(express.static(__dirname + '/public'))
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+
+// Set Cookie Parser, sessions and flash
+app.use(cookieParser('NotSoSecret'));
+app.use(session({
+  secret : 'something',
+  cookie: { maxAge: 60000 },
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(flash());
 
 // router, który zarządza podstroną z wsyztkimi towarami
 app.use('/produkty', towaryRouter);
 app.use('/register', registerRouter);
-app.use('/login', loginRouter)
+app.use('/login', loginRouter);
 
 app.get('/', (req, res) => {
   res.render('index')

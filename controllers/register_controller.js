@@ -1,6 +1,5 @@
 const {check, validationResult} = require("express-validator");
 
-
 const registerValidator = [
     check('username', 'username must be of length from 4 to 12 characters').notEmpty().isLength({min:4, max:12}),
     check('email', 'Email is not valid').isEmail(),
@@ -15,15 +14,20 @@ const registerValidator = [
 
 ]
 
-function registerController(req, res){
+function registerControllerPost(req, res){
     const errors  = validationResult(req)
     if (errors.isEmpty()){
+        req.flash("redirectFromRegisterMsg", "Pomyślnie zarejestrowano, możesz się zalogować")
         res.redirect('login')
     }else{
-        res.send(errors.array())
+        errorMessages = errors.array()
+        for(let i=0; i<errorMessages.length; i++){
+            req.flash(errorMessages[i]['path'], errorMessages[i]['msg'])
+        }
+        res.redirect('register')
     }
 }
 
-module.exports = {registerController,
+module.exports = {registerControllerPost,
                   registerValidator
                  }
