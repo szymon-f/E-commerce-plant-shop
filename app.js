@@ -17,10 +17,10 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 // Set Cookie Parser, sessions and flash
-app.use(cookieParser('NotSoSecret'));
+app.use(cookieParser(appConfig.cookieSecretKey));
 app.use(session({
   secret : 'something',
-  cookie: { maxAge: 60000 },
+  cookie: { maxAge: appConfig.cookieMaxAge },
   resave: true,
   saveUninitialized: true
 }));
