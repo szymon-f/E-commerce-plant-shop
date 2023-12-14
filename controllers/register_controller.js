@@ -20,7 +20,7 @@ function registerControllerPost(req, res){
         req.flash("redirectFromRegisterMsg", "Pomyślnie zarejestrowano, możesz się zalogować")
         res.redirect('login')
     }else{
-        errorMessages = errors.array()
+        const errorMessages = errors.array()
         for(let i=0; i<errorMessages.length; i++){
             req.flash(errorMessages[i]['path'], errorMessages[i]['msg'])
         }
