@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Tiles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            background-color: #f0f0f0;
+        }
+
+        .product-tile {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 300px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .product-description {
+            margin-bottom: 12px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #e44d26;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .add-to-cart-button {
+            width: 30px;
+            height: 30px;
+            background-color: #e44d26;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-to-cart-button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <% items =  locals.data%>
+    <% for(let item in items){ %>
+    <div class="product-tile">
+        <img class="product-image" src="https://via.placeholder.com/300" alt="Product Image">
+        <div class="product-details">
+            <div class="product-title"><%= data[item].name %></div>
+            <div class="product-description"><%= data[item].description %></div>
+            <div class="product-price"><%= data[item].price %> PLN</div>
+            <button class="add-to-cart-button">+</button>
+        </div>
+    </div>
+    <% } %>
+
+</body>
+</html>
