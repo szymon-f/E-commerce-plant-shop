@@ -19,7 +19,7 @@ app.use(express.json());
 // Set Cookie Parser, sessions and flash
 app.use(cookieParser(appConfig.cookieSecretKey));
 app.use(session({
-  secret : 'something',
+  secret : appConfig.sessionSecret,
   cookie: { maxAge: appConfig.cookieMaxAge },
   resave: true,
   saveUninitialized: true
