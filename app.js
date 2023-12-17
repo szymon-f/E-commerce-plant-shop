@@ -20,9 +20,6 @@ app.use(express.json());
 
 app.use(cookieParser(appConfig.cookieSecretKey));
 app.use(session({
-  store: new FileStore({
-    path: './sessions', // Folder, w którym będą przechowywane pliki sesji
-  }),
   secret : appConfig.sessionSecret,
   cookie: { maxAge: appConfig.cookieMaxAge },
   resave: true,
