@@ -7,7 +7,7 @@ function productsControllerPost(req, res) {
     } else {
       const filtered = [];
       for (let item in data) {
-        if (data[item].name.toLowerCase().includes(req.body["query"])) {
+        if (data[item].name.toLowerCase().includes(req.body["query"].toLowerCase())) {
           filtered.push(data[item]);
         }
       }
