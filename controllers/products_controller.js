@@ -11,7 +11,6 @@ function productsControllerPost(req, res) {
           filtered.push(data[item]);
         }
       }
-      console.log(filtered);
       res.render("products", { data: filtered });
     }
   });
@@ -32,11 +31,8 @@ function productsControllerGet(req, res) {
 
 
 function productsControllerSaveToSession (req, res) {
-  console.log("koszyk")
-  const dataToSave = req.body.data;
-  console.log(req.body)
-  // req.session.savedData = dataToSave;
-
+  req.session.cart.push(req.body.productId)
+  console.log(req.session.cart)
   res.json({ success: true });
 }
 

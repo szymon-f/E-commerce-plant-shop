@@ -4,13 +4,12 @@ document.querySelectorAll(".save-button").forEach((button) => {
     const dataToSave = {
       productId: productId,
     };
-    console.log("cos xxx");
     fetch("/products/add-to-cart", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ data: dataToSave }),
+      body: JSON.stringify(dataToSave),
     })
       .then((response) => response.json())
       .then((data) => {
