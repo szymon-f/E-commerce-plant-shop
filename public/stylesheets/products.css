@@ -12,6 +12,11 @@ body {
   display: block;
 }
 
+.user-tile{
+  font-family: 'Playfair Display', serif;
+  color: #474747;
+}
+
 .custom-alert {
   display: none;
   position: fixed;

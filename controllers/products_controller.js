@@ -24,7 +24,7 @@ function productsControllerGet(req, res) {
     if (err) {
       throw err;
     } else {
-      res.render("products", { data: data });
+      res.render("products", { data: data , logged: req.session.logged});
     }
   });
 }
@@ -36,8 +36,14 @@ function productsControllerSaveToSession (req, res) {
   res.json({ success: true });
 }
 
+function productsControllerLogout(req, res){
+  req.session.logged = false
+  res.redirect('/products')
+}
+
 module.exports = {
   productsControllerPost,
   productsControllerGet,
-  productsControllerSaveToSession
+  productsControllerSaveToSession,
+  productsControllerLogout
 };

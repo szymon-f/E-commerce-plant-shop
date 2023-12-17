@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Merienda:wght@400;700&family=Tenor+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="scripts/addToCart.js" defer></script>
+    <script src="scripts/logout.js" defer></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="scripts/cartNotification.js" defer></script>
     <title>Product Tiles</title>
@@ -25,8 +26,13 @@
                 <button type="submit">Wyszukaj</button>
             </form>
             <div class="user-actions">
+              <% if(locals.logged){ %>
+                <div class="user-tile"> Witaj, nazwa!</div>
+                <button class="logout-button">Wyloguj</button>
+              <% }else{ %>
                 <form class="redirect" action="/login" method="GET"><button>Zaloguj</button></form>
                 <form class="redirect" action="/register" method="GET"><button>Zarejestruj</button></form>
+              <% } %>
             </div>
             <div class="cart">
               <form class="redirect" action="/cart" method="GET">
