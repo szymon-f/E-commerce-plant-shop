@@ -31,7 +31,7 @@ function productsControllerGet(req, res) {
 
 
 function productsControllerSaveToSession (req, res) {
-  req.session.cart.push(req.body.productId)
+  req.session.cart.push(req.body)
   console.log(req.session.cart)
   res.json({ success: true });
 }
