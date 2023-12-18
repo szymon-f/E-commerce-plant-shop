@@ -35,11 +35,13 @@
               <% } %>
             </div>
             <div class="cart">
-              <form class="redirect" action="/cart" method="GET">
-                <button>
-                <i class="fa fa-shopping-cart" style="font-size:36px"></i>
-                </button>
-              </form>
+              <% if(locals.logged){ %>
+                <form class="redirect" action="/cart" method="GET">
+                  <button>
+                  <i class="fa fa-shopping-cart" style="font-size:36px"></i>
+                  </button>
+                </form>
+              <% } %>
             </div>
         </div>
 

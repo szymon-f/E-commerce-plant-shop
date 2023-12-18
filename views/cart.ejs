@@ -18,6 +18,7 @@
                 <div class="elem-desc fst">Opis</div>
                 <div class="elem-price fst">Cena</div>
             </div>
+            <% if(locals.items){ %>
             <% locals.items.forEach(element => {%>
                 <%priceSum += Number(element.productPrice)%>
                  
@@ -27,6 +28,7 @@
                     <div class="elem-price"><%= element.productPrice %></div>
                 </div>
             <% }); %>
+            <% } %>
         <div class="summary">W sumie do zapłaty: <%= priceSum %> zł</div>
         <form action="/cart" method="POST"><button class="form-button">Zapłać</button></form>
         </div>
