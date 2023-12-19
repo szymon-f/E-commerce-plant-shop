@@ -1,0 +1,35 @@
+button{
+    letter-spacing: 0.2em;
+    color: #ffffff;
+    background-color: #9cebd5;
+    cursor: pointer;
+    outline: none;
+    border-radius: 30px;
+    height: 20px;
+    border: none;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+
+.table-desc{
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-item{
+    width: 600px;
+    align-items: center;
+}
+
+.price-edit-tag{
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.elem-name, .elem-desc, .elem-price {
+    margin-left: 10px;
+    margin-right: 10px;
+}

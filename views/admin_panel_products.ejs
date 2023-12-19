@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edycja Produktów</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Merienda:wght@400;700&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/cart.css">
+    <link rel="stylesheet" href="/stylesheets/admin_panel_products.css">
+</head>
+<body>
+    <h1>Produkty w sklepie</h1>
+    <div class="container">
+        <div class="cart-content">
+            <div class="table-desc fst">
+                <div class="elem-name fst">Nazwa</div>
+                <div class="elem-desc fst">Opis</div>
+                <div class="price-edit-tag">
+                    <div class="elem-price fst">Cena</div>
+                    <div id="edit-tag" class="elem-price fst">Edytuj</div>
+                </div>
+            </div>
+            <% if(locals.data){ %>
+            <% locals.data.forEach(element => {%>
+                <div class="cart-item">
+                    <div class="elem-name"><%= element.name %></div>
+                    <div class="elem-desc"><%= element.description %></div>
+                    <div class="elem-price"><%= element.price %></div>
+                    <div class="elem-price"></div>
+                    <button>Edytuj</button>
+                </div>
+            <% }); %>
+            <% } %>
+        </div>
+    </div>  
+</body>
+</html>
