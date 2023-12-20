@@ -2,7 +2,7 @@
 -- usage: sqlite3 db.sqlite < dbinit.sql
 
 CREATE TABLE products
-  (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  (id INTEGER PRIMARY KEY,
    name TEXT UNIQUE NOT NULL,
    price INTEGER NOT NULL,
    description TEXT,
@@ -10,7 +10,7 @@ CREATE TABLE products
    inOffer INTEGER NOT NULL);
 
 CREATE TABLE categories 
-  (id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  (id INTEGER PRIMARY KEY,
    name TEXT UNIQUE NOT NULL);
 
 CREATE TABLE categoryProperties
@@ -31,13 +31,13 @@ CREATE TABLE productProperties
    FOREIGN KEY(productID) REFERENCES products(id));
 
 CREATE TABLE users
-  (userID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  (userID INTEGER PRIMARY KEY,
    username TEXT NOT NULL UNIQUE,
    email TEXT NOT NULL,
    passwordHash TEXT NOT NULL UNIQUE);
 
 CREATE TABLE admins
-  (adminID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  (adminID INTEGER PRIMARY KEY,
    username TEXT NOT NULL UNIQUE,
    passwordHash TEXT NOT NULL UNIQUE);
 
@@ -49,7 +49,7 @@ CREATE TABLE orderProducts
    FOREIGN KEY(productID) REFERENCES products(id));
 
 CREATE TABLE customerOrders
-  (orderID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  (orderID INTEGER PRIMARY KEY,
    userID INTEGER NOT NULL,
    orderDate TEXT NOT NULL, -- ISO8601 format  - "YYYY-MM-DD HH:MM:SS"
    orderStatus TEXT NOT NULL, -- either "pending" or "shipped". Theoretically this column should be an integer that is mapped to its status in another table.
