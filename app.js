@@ -37,7 +37,6 @@ app.use('/login', loginRouter);
 app.use('/cart', cartRouter);
 app.use('/loginAdmin', loginAdminRouter)
 app.use('/adminPanel', adminPanelRouter)
-// app.use('/adminPanel', express.static('public')); // dlaczego bez tego nei chciało podłączyć styli, do tej pory żadnych problemów tego typu nie było
 
 app.get('/', (req, res) => {
   res.render('index')

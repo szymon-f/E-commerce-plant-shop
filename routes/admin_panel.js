@@ -2,8 +2,10 @@ const {
   adminPanelControllerGet,
   adminPanelControllerPost,
   adminPanelProductsControllerGet,
+  adminPanelProductsControllerPost,
   adminPanelUsersControllerGet,
   adminPanelOrdersControllerGet,
+  adminPanelEditProductControllerGet
 } = require("../controllers/admin_panel_controller");
 
 const express = require("express");
@@ -18,8 +20,12 @@ router.post("/", adminPanelControllerPost);
 
 router.get("/products", adminPanelProductsControllerGet);
 
+router.post("/products", adminPanelProductsControllerPost)
+
 router.get("/users", adminPanelUsersControllerGet);
 
 router.get("/orders", adminPanelOrdersControllerGet);
+
+router.get('/editProduct', adminPanelEditProductControllerGet)
 
 module.exports = router;

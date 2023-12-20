@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/stylesheets/global.css">
     <link rel="stylesheet" href="/stylesheets/cart.css">
     <link rel="stylesheet" href="/stylesheets/admin_panel_products.css">
+    <script src="/scripts/editProduct.js" defer></script>
 </head>
 <body>
     <h1>Produkty w sklepie</h1>
@@ -29,7 +30,7 @@
                     <div class="elem-desc"><%= element.description %></div>
                     <div class="elem-price"><%= element.price %></div>
                     <div class="elem-price"></div>
-                    <button>Edytuj</button>
+                    <button class="edit-product-button" product-id="<%= element.id %>" product-name="<%= element.name %>" product-description="<%= element.description %>" product-price="<%= element.price %>">Edytuj</button>
                 </div>
             <% }); %>
             <% } %>

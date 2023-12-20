@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edytuj produkt</title>
+    <link rel="stylesheet" href="/stylesheets/admin_panel_edit_product.css">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+</head>
+<body>
+    <h1>Edytuj produkt</h1>
+    <form action="#" method="POST">
+        <span>Nazwa</span>
+        <input type="text" name="productName" id="productName" value="<%= locals.productName %>">
+        <span>Opis</span>
+        <textarea type="text" name="productDescritpiotn" id="productDescription"><%= locals.productDescription %></textarea>
+        <span>Cena</span>
+        <input type="text" name="productPrice" id='productPrice' value="<%= locals.productPrice %>">
+        <button type="submit" class="form-button">Zapisz</button>
+    </form>
+    <button class="form-button">Anuluj</button>
+</body>
+</html></html>
