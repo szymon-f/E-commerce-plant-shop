@@ -30,6 +30,19 @@ CREATE TABLE productProperties
    propertyValue TEXT NOT NULL,
    FOREIGN KEY(productID) REFERENCES products(id));
 
+CREATE TABLE users
+  (userID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+   username TEXT NOT NULL UNIQUE,
+   email TEXT NOT NULL,
+   passwordHash TEXT NOT NULL UNIQUE);
+
+CREATE TABLE admins
+  (adminID INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT,
+   username TEXT NOT NULL UNIQUE,
+   passwordHash TEXT NOT NULL UNIQUE);
+
+--NOTE: add orers table here
+
 INSERT INTO products (name, price, description, imagePath, inOffer) VALUES ('Hiacynt', 700, 'Ten kwiat ma niezwykle okazałe kwiatostany, wysokości nawet 30cm, wydzielające intensywny i oryginaly zapach.', '', 1);
 INSERT INTO products (name, price, description, imagePath, inOffer) VALUES ('Chryzantema', 1500, 'Opis chryzantem. Chryzantemy złociste są najlepsze.', '', 1);
 INSERT INTO products (name, price, description, imagePath, inOffer) VALUES ('Doniczka Ratolla Round', 998, 'Piękna biała doniczka, idealna na parapet.', '', 1);
