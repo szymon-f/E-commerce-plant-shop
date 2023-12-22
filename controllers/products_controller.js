@@ -1,5 +1,7 @@
 const productModel = require("../models/product.model");
 
+
+// szukajka
 function productsControllerPost(req, res) {
   productModel.getAll((err, data) => {
     if (err) {
@@ -32,7 +34,6 @@ function productsControllerGet(req, res) {
 
 function productsControllerSaveToSession (req, res) {
   req.session.cart.push(req.body)
-  console.log(req.session.cart)
   res.json({ success: true });
 }
 

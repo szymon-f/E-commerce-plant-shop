@@ -1,0 +1,49 @@
+button{
+    letter-spacing: 0.2em;
+    color: #ffffff;
+    background-color: #9cebd5;
+    cursor: pointer;
+    outline: none;
+    border-radius: 30px;
+    height: 20px;
+    border: none;
+    margin-left: 15px;
+    margin-right: 5px;
+}
+
+
+.table-desc{
+    width: 800px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.cart-item{
+    display: flex;
+    justify-content: space-around;
+    width: 800px;
+    align-items: center;
+}
+
+.price-edit-tag{
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.elem-name, .elem-desc, .elem-price {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.elem-desc, .elem-desc-fst{
+    width: 200px;
+}
+
+.elem-name, .elem-name-fst{
+    width: 150px;
+}
+
+.elem-img-path-fst, .elem-img-path{
+    width: 200px;
+}

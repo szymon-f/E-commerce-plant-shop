@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edycja Produktów</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Merienda:wght@400;700&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/cart.css">
+    <link rel="stylesheet" href="/stylesheets/admin_panel_products.css">
+    <script src="/scripts/editProduct.js" defer></script>
+    <script src="/scripts/newProduct.js" defer></script>
+    <script src="/scripts/deleteProduct.js" defer></script>
+</head>
+<body>
+    <h1>Produkty w sklepie</h1>
+    <div class="container">
+        <div class="cart-content">
+            <div class="table-desc fst">
+                <div class="elem-name-fst">Nazwa</div>
+                <div class="elem-desc-fst">Opis</div>
+                <div class="elem-price-fst">Cena</div>
+                <div class="elem-img-path-fst">ImgLink</div>
+                <div class="elem-in-offer-fst">InOffer</div>
+                <div id="edit-tag" class="elem-price fst">Edytuj</div>
+                <div id="edit-tag" class="elem-price fst">Usuń</div>
+            </div>
+            <% if(locals.data){ %>
+            <% locals.data.forEach(element => {%>
+                <div class="cart-item">
+                    <div class="elem-name"><%= element.name %></div>
+                    <div class="elem-desc"><%= element.description %></div>
+                    <div class="elem-price"><%= element.price %></div>
+                    <div class="elem-img-path"><%= element.imagePath %></div>
+                    <div class="elem-in-offer"><%= element.inOffer %></div>
+                    <div class="elem-price"></div>
+                    <button class="edit-product-button" product-id="<%= element.id %>" product-name="<%= element.name %>" product-description="<%= element.description %>" product-price="<%= element.price %>" product-img-path="<%= element.imagePath %>" product-in-offer="<%= element.inOffer %>">Edytuj</button>
+                    <button class="delete-product-button" product-id="<%= element.id %>">Usuń</button>
+                </div>
+            <% }); %>
+            <% } %>
+        </div>
+        <button class="new-product-button">Dodaj nowy produkt</button>
+    </div>  
+</body>
+</html>

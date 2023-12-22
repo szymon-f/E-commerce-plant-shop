@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% if(locals.users){ %>
+        <title>Lista użytkowników</title>
+    <% }else{ %>
+        <title>Lista zamówień</title>
+    <% } %>
+
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Merienda:wght@400;700&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/global.css">
+    <link rel="stylesheet" href="/stylesheets/cart.css">
+    <link rel="stylesheet" href="/stylesheets/admin_panel_products.css">
+    <link rel="stylesheet" href="/stylesheets/admin_panel_users.css">
+    <script src="/scripts/backToPanelButton.js" defer></script>
+</head>
+<body>
+    <% if(locals.users){ %>
+        <<h1>Użytkownicy</h1>>
+    <% }else{ %>
+        <<h1>Zamówienia</h1>>
+    <% } %>
+    <div class="container">
+        <div class="cart-content">
+            <div class="table-desc fst">
+                <% if(locals.users){ %>
+                    <div class="elem-name-fst">Nazwa</div>
+                    <div class="elem-desc-fst">Hash hasła</div>
+                <% }else{ %>
+                    <div class="elem-name-fst">Numer</div>
+                    <div class="elem-desc-fst">Nazwa</div>
+                <% } %>
+            </div>
+            <% if(locals.data && locals.users){ %>
+            <% locals.data.forEach(element => {%>
+                <div class="cart-item">
+                    <div class="elem-name"><%= element.username %></div>
+                    <div class="elem-desc"><%= element.pwdHash %></div>
+                </div>
+            <% }); %>
+            <% }else if(locals.data){ %>
+                <% locals.data.forEach(element => {%>
+                    <div class="cart-item">
+                        <div class="elem-name"><%= element.orderNumber %></div>
+                        <div class="elem-desc"><%= element.orderName %></div>
+                    </div>
+                <% }); %>    
+            <% } %>
+        </div>
+        <button class="go-back-button">Wróć</button>
+    </div>  
+</body>
+</html>
