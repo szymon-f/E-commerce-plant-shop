@@ -10,18 +10,21 @@
     <link rel="stylesheet" href="/stylesheets/cart.css">
     <link rel="stylesheet" href="/stylesheets/admin_panel_products.css">
     <script src="/scripts/editProduct.js" defer></script>
+    <script src="/scripts/newProduct.js" defer></script>
+    <script src="/scripts/deleteProduct.js" defer></script>
 </head>
 <body>
     <h1>Produkty w sklepie</h1>
     <div class="container">
         <div class="cart-content">
             <div class="table-desc fst">
-                <div class="elem-name fst">Nazwa</div>
-                <div class="elem-desc fst">Opis</div>
-                <div class="price-edit-tag">
-                    <div class="elem-price fst">Cena</div>
-                    <div id="edit-tag" class="elem-price fst">Edytuj</div>
-                </div>
+                <div class="elem-name-fst">Nazwa</div>
+                <div class="elem-desc-fst">Opis</div>
+                <div class="elem-price-fst">Cena</div>
+                <div class="elem-img-path-fst">ImgLink</div>
+                <div class="elem-in-offer-fst">InOffer</div>
+                <div id="edit-tag" class="elem-price fst">Edytuj</div>
+                <div id="edit-tag" class="elem-price fst">Usuń</div>
             </div>
             <% if(locals.data){ %>
             <% locals.data.forEach(element => {%>
@@ -29,12 +32,16 @@
                     <div class="elem-name"><%= element.name %></div>
                     <div class="elem-desc"><%= element.description %></div>
                     <div class="elem-price"><%= element.price %></div>
+                    <div class="elem-img-path"><%= element.imagePath %></div>
+                    <div class="elem-in-offer"><%= element.inOffer %></div>
                     <div class="elem-price"></div>
-                    <button class="edit-product-button" product-id="<%= element.id %>" product-name="<%= element.name %>" product-description="<%= element.description %>" product-price="<%= element.price %>">Edytuj</button>
+                    <button class="edit-product-button" product-id="<%= element.id %>" product-name="<%= element.name %>" product-description="<%= element.description %>" product-price="<%= element.price %>" product-img-path="<%= element.imagePath %>" product-in-offer="<%= element.inOffer %>">Edytuj</button>
+                    <button class="delete-product-button" product-id="<%= element.id %>">Usuń</button>
                 </div>
             <% }); %>
             <% } %>
         </div>
+        <button class="new-product-button">Dodaj nowy produkt</button>
     </div>  
 </body>
 </html>

@@ -109,11 +109,11 @@ Product.getAll = (result) => {
 // columns are: 'name', 'price', 'description', 'imagePath', 'inOffer'
 Product.update = (productID, column, newValue, result) => {
   const queries = {
-    name: "UPDATE products SET name=? WHERE productID=?;",
-    price: "UPDATE products SET price=? WHERE productID=?;",
-    description: "UPDATE products SET description=? WHERE productID=?;",
-    imagePath: "UPDATE products SET imagePath=? WHERE productID=?;",
-    inOffer: "UPDATE products SET inOffer=? WHERE productID=?;",
+    name: "UPDATE products SET name=? WHERE id=?;",
+    price: "UPDATE products SET price=? WHERE id=?;",
+    description: "UPDATE products SET description=? WHERE id=?;",
+    imagePath: "UPDATE products SET imagePath=? WHERE id=?;",
+    inOffer: "UPDATE products SET inOffer=? WHERE id=?;",
   };
   const errMessages = {
     name: [
@@ -137,7 +137,9 @@ Product.update = (productID, column, newValue, result) => {
       "Trying to update product inOffer for a productID, that doesn't exist",
     ],
   };
+  console.log("kolumna", column)
   const query = queries[column];
+  console.log("query", query)
   const params = [newValue, productID];
   db.run(query, params, function (err, res) {
     if (err) {
@@ -156,7 +158,7 @@ Product.update = (productID, column, newValue, result) => {
 
 // deletes a product for a given productID
 Product.deleteProduct = (productID, result) => {
-  const query = "DELETE FROM products WHERE productID=?;";
+  const query = "DELETE FROM products WHERE id=?;";
   const params = [productID];
   db.run(query, params, function (err, res) {
     if (err) {

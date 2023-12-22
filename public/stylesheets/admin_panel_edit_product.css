@@ -28,3 +28,7 @@ form input{
     box-sizing: border-box;
     overflow-wrap: break-word;
 }
+
+#productId{
+    display: none;
+}
