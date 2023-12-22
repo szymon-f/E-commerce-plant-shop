@@ -26,7 +26,7 @@ function adminPanelProductsControllerGet(req, res) {
 
 function adminPanelUsersControllerGet(req, res) {
   if (req.session.loggedAsAdmin) {
-    res.send("widok zarejestrowanych użytkowników");
+    res.render('admin_panel_users_orders', {users: true})
   } else {
     res.send("Musisz być zalogowany jako admin, aby wyświetlić tę zawartość");
   }
@@ -34,7 +34,7 @@ function adminPanelUsersControllerGet(req, res) {
 
 function adminPanelOrdersControllerGet(req, res) {
   if (req.session.loggedAsAdmin) {
-    res.send("widok aktywnych zamówień");
+    res.render('admin_panel_users_orders')
   } else {
     res.send("Musisz być zalogowany jako admin, aby wyświetlić tę zawartość");
   }
