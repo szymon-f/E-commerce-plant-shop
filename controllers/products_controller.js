@@ -32,7 +32,9 @@ function productsControllerGet(req, res) {
 function productsControllerSaveToSession (req, res) {
   console.log("aktualny user", req.session.user)
   console.log("dodawanie do koszyka", req.body)
-  req.session.user.cart.push(req.body)
+  if(req.session.user.logged){
+    req.session.user.cart.push(req.body)
+  }
   res.json({ success: true });
 }
 
