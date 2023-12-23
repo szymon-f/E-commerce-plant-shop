@@ -1,5 +1,6 @@
 const productModel = require("../models/product.model");
 const userModel = require("../models/user.model");
+const customerOrderModel = require("../models/customerOrder.model");
 
 function adminPanelControllerGet(req, res) {
   if (req.session.loggedAsAdmin) {
@@ -41,7 +42,14 @@ function adminPanelUsersControllerGet(req, res) {
 
 function adminPanelOrdersControllerGet(req, res) {
   if (req.session.loggedAsAdmin) {
-    res.render('admin_panel_users_orders')
+    customerOrderModel.getAll((err, data)=>{
+        if(err){
+          console.log(err)
+        }else{
+          res.render('admin_panel_users_orders', {data: data})
+        }
+      }
+    )
   } else {
     res.send("Musisz być zalogowany jako admin, aby wyświetlić tę zawartość");
   }

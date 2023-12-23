@@ -18,33 +18,39 @@
 </head>
 <body>
     <% if(locals.users){ %>
-        <<h1>Użytkownicy</h1>>
+        <h1>Użytkownicy</h1>
     <% }else{ %>
-        <<h1>Zamówienia</h1>>
+        <h1>Zamówienia</h1>
     <% } %>
     <div class="container">
         <div class="cart-content">
             <div class="table-desc fst">
                 <% if(locals.users){ %>
+                    <div class="elem-name-fst">Id</div>
                     <div class="elem-name-fst">Nazwa</div>
-                    <div class="elem-desc-fst">E-mail</div>
+                    <div class="elem-desc-fst email">E-mail</div>
                 <% }else{ %>
-                    <div class="elem-name-fst">Numer</div>
-                    <div class="elem-desc-fst">Nazwa</div>
+                    <div class="elem-name-fst">OrderId</div>
+                    <div class="elem-desc-fst">UserId</div>
+                    <div class="elem-desc-fst order-date">Data Złożenia</div>
+                    <div class="elem-desc-fst">Status</div>
                 <% } %>
             </div>
             <% if(locals.data && locals.users){ %>
             <% locals.data.forEach(element => {%>
                 <div class="cart-item">
-                    <div class="elem-name"><%= element.username %></div>
-                    <div class="elem-desc"><%= element.email %></div>
+                    <div class="elem-name"><%= element.userID %></div>
+                    <div class="elem-desc"><%= element.username %></div>
+                    <div class="elem-desc email"><%= element.email %></div>
                 </div>
             <% }); %>
             <% }else if(locals.data){ %>
                 <% locals.data.forEach(element => {%>
                     <div class="cart-item">
-                        <div class="elem-name"><%= element.orderNumber %></div>
-                        <div class="elem-desc"><%= element.orderName %></div>
+                        <div class="elem-name"><%= element.orderID %></div>
+                        <div class="elem-desc"><%= element.userID %></div>
+                        <div class="elem-desc order-date"><%= element.orderDate %></div>
+                        <div class="elem-desc"><%= element.orderStatus %></div>
                     </div>
                 <% }); %>    
             <% } %>

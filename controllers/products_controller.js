@@ -30,8 +30,6 @@ function productsControllerGet(req, res) {
 
 
 function productsControllerSaveToSession (req, res) {
-  console.log("aktualny user", req.session.user)
-  console.log("dodawanie do koszyka", req.body)
   if(req.session.user.logged){
     req.session.user.cart.push(req.body)
   }
@@ -39,7 +37,7 @@ function productsControllerSaveToSession (req, res) {
 }
 
 function productsControllerLogout(req, res){
-  req.session.user = {logged: false, cart: [], username: ""}
+  req.session.user = undefined
   res.redirect('/products')
 }
 
