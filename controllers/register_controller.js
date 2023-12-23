@@ -1,4 +1,8 @@
 const { check, validationResult } = require("express-validator");
+const bcrypt = require("bcrypt");
+const userModel = require("../models/user.model");
+const { saltRounds } = require("../config/app.config");
+const User = require("../models/user.model");
 
 const registerValidator = [
   check("username", "username must be of length from 4 to 12 characters")
@@ -25,11 +29,25 @@ const registerValidator = [
 function registerControllerPost(req, res) {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
-    req.flash(
-      "redirectFromRegisterMsg",
-      "Pomyślnie zarejestrowano, możesz się zalogować"
-    );
-    res.redirect("login");
+    const { username, email, password } = req.body;
+    bcrypt
+      .hash(password, saltRounds)
+      .then((hash) => {
+        userModel.create(new User(username, email, hash), (err, data) => {
+          if (err) {
+            req.flash("Coś poszło nie tak, spróbuj jeszcze raz.");
+            res.redirect("register");
+            return;
+          } else {
+            // new user created successfully
+            req.flash(
+              "redirectFromRegisterMsg",
+              "Pomyślnie zarejestrowano, możesz się zalogować"
+            );
+            res.redirect("login");
+          }
+        });
+      });
   } else {
     const errorMessages = errors.array();
     for (let i = 0; i < errorMessages.length; i++) {
