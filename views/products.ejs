@@ -26,7 +26,7 @@
                 <button type="submit">Wyszukaj</button>
             </form>
             <div class="user-actions">
-              <% if(locals.user.logged){ %>
+              <% if(locals.user){ %>
                 <div class="user-tile"> Witaj, <%= locals.user.username %>!</div>
                 <button class="logout-button">Wyloguj</button>
               <% }else{ %>
@@ -35,7 +35,7 @@
               <% } %>
             </div>
             <div class="cart">
-              <% if(locals.user.logged){ %>
+              <% if(locals.user){ %>
                 <form class="redirect" action="/cart" method="GET">
                   <button>
                   <i class="fa fa-shopping-cart" style="font-size:36px"></i>
@@ -62,7 +62,7 @@
                       </div>
                       <div class="product-price-btn">
                         <p><span><%= data[item].price %></span>zł</p>
-                        <% if(locals.user.logged){ %>
+                        <% if(locals.user){ %>
                           <button class="save-button" product-id="<%= data[item].id %>" product-name="<%= data[item].name %>" product-description="<%= data[item].description %>" product-price="<%= data[item].price %>">Dodaj do koszyka</button>
                         <% } %>
                       </div>

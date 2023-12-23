@@ -30,8 +30,11 @@
             <% }); %>
             <% } %>
         <div class="summary">W sumie do zapłaty: <%= priceSum %> zł</div>
-        <form action="/cart" method="POST"><button class="form-button">Zapłać</button></form>
+        <form action="/cart" method="POST">
+            <input type="hidden" name="cart-items" value="<%= JSON.stringify(locals.items) %>">
+            <button class="form-button">Zapłać</button>
+        </form>
         </div>
-    </div>    
+    </div> 
 </body>
 </html>

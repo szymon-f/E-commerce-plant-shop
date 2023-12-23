@@ -1,13 +1,9 @@
-const productModel = require("../models/product.model");
+const userModel = require("../models/user.model");
 
-productModel.getAll((err, data) => {
+userModel.getByUsername('user', (err, data) => {
   if (err) {
     throw err;
   } else {
     console.log(data)
-    for( let item in data){
-        console.log(data[item].name)
-        console.log("################")
-    }
   }
 });
