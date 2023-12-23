@@ -12,6 +12,19 @@ const {
 const express = require("express");
 const router = express.Router();
 const bodyParser = require("body-parser");
+const multer  = require('multer')
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({ storage: storage });
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
@@ -29,6 +42,6 @@ router.get("/orders", adminPanelOrdersControllerGet);
 
 router.get('/editProduct', adminPanelEditProductControllerGet)
 
-router.post("/editProduct", adminPanelEditProductControllerPost)
+router.post("/editProduct", upload.single('imagePath'), adminPanelEditProductControllerPost)
 
 module.exports = router;
