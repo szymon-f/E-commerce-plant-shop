@@ -53,7 +53,11 @@
 
                 <div class="wrapper">
                     <div class="product-img">
-                      <img src="http://bit.ly/2tMBBTd" height="420" width="327">
+                      <% if(data[item].imagePath) {%>
+                        <img src="<%= data[item].imagePath %>" height="420" width="327">
+                      <% }else{ %>
+                        <img src="http://bit.ly/2tMBBTd" height="420" width="327">
+                      <% } %>
                     </div>
                     <div class="product-info">
                       <div class="product-text">

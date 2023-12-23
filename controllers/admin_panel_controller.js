@@ -1,6 +1,9 @@
 const productModel = require("../models/product.model");
 const userModel = require("../models/user.model");
 const customerOrderModel = require("../models/customerOrder.model");
+const { uploadImageToImgBB } = require("../controllers/sendImage");
+const appConfig = require("../config/app.config");
+const path = require("path");
 
 function adminPanelControllerGet(req, res) {
   if (req.session.loggedAsAdmin) {
@@ -18,6 +21,7 @@ function adminPanelProductsControllerGet(req, res) {
       if (err) {
         throw err;
       } else {
+        console.log("listwanie produktów: ", data);
         res.render("admin_panel_products", { data: data });
       }
     });
@@ -28,13 +32,13 @@ function adminPanelProductsControllerGet(req, res) {
 
 function adminPanelUsersControllerGet(req, res) {
   if (req.session.loggedAsAdmin) {
-    userModel.getAll((err, data)=>{
-      if(err){
-        console.log(err)
-      }else{
-        res.render('admin_panel_users_orders', {users: true, data: data})
+    userModel.getAll((err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("admin_panel_users_orders", { users: true, data: data });
       }
-    })
+    });
   } else {
     res.send("Musisz być zalogowany jako admin, aby wyświetlić tę zawartość");
   }
@@ -42,14 +46,13 @@ function adminPanelUsersControllerGet(req, res) {
 
 function adminPanelOrdersControllerGet(req, res) {
   if (req.session.loggedAsAdmin) {
-    customerOrderModel.getAll((err, data)=>{
-        if(err){
-          console.log(err)
-        }else{
-          res.render('admin_panel_users_orders', {data: data})
-        }
+    customerOrderModel.getAll((err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("admin_panel_users_orders", { data: data });
       }
-    )
+    });
   } else {
     res.send("Musisz być zalogowany jako admin, aby wyświetlić tę zawartość");
   }
@@ -63,34 +66,49 @@ function adminPanelEditProductControllerGet(req, res) {
   }
 }
 
+function updateProduct(req, res) {
+  if (req.body.ifNewProduct == "") {
+    for (const [key, value] of Object.entries(req.body)) {
+      if (key != "productId" && key != "ifNewProduct") {
+        productModel.update(req.body.productId, key, value, (err, data) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log("Poyślnie edytowano produkt");
+          }
+        });
+      }
+    }
+  } else {
+    delete req.body.ifNewProduct;
+    delete req.body.productId;
+    console.log("nowy produkt", req.body);
+    productModel.create(req.body, (err, data) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("Poyślnie dodano produkt");
+      }
+    });
+  }
+  res.redirect("/adminPanel/products");
+}
+
 function adminPanelEditProductControllerPost(req, res) {
   if (req.session.loggedAsAdmin) {
-    console.log("update formularz", req.body);
-    if (req.body.ifNewProduct == "") {
-      for (const [key, value] of Object.entries(req.body)) {
-        if (key != "productId" && key != "ifNewProduct") {
-          productModel.update(req.body.productId, key, value, (err, data) => {
-            if (err) {
-              console.log(err);
-            } else {
-              console.log("Poyślnie edytowano produkt");
-            }
-          });
-        }
-      }
-    } else {
-      delete req.body.ifNewProduct;
-      delete req.body.productId;
-      console.log("nowy produkt", req.body);
-      productModel.create(req.body, (err, data) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("Poyślnie dodano produkt");
-        }
-      });
+    if(req.file){
+      const fpath = path.join(appConfig.filePath, req.file.filename);
+      uploadImageToImgBB(appConfig.APIkey, fpath)
+        .then((response) => {
+          req.body.imagePath = response.image.url;
+          updateProduct(req, res)
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }else{
+      updateProduct(req, res)
     }
-    res.redirect("/adminPanel/products");
   } else {
     res.send("Musisz być zalogowany jako admin aby dodać produkt do bazy");
   }

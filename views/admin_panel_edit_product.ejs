@@ -14,7 +14,7 @@
     <% }else{ %>
         <h1>Edytuj produkt</h1>
     <% } %>
-    <form action="#" method="POST">
+    <form action="#" method="POST" enctype="multipart/form-data">
         <input type="text" name="ifNewProduct" id="productId" value="<%= locals.newProduct %>">
         <input type="text" name="productId" id="productId" value="<%= locals.productId %>">
         <span>Nazwa</span>
@@ -24,7 +24,8 @@
         <span>Cena</span>
         <input type="text" name="price" id='productPrice' value="<%= locals.productPrice %>">
         <span>Link do obrazka</span>
-        <input type="text" name="imagePath" id='productImgPath' value="<%= locals.productImgPath %>">
+        <span>(najlepiej rozmiaru 327x420 lub proporcjonalnie)</span>
+        <input type="file" name="imagePath" id='productImgPath' value="<%= locals.productImgPath %>">
         <span>W ofercie</span>
         <input type="text" name="inOffer" id='productInOffer' value="<%= locals.productInOffer %>">
         <button type="submit" class="form-button">Zapisz</button>
