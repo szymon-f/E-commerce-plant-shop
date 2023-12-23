@@ -27,7 +27,7 @@
             <div class="table-desc fst">
                 <% if(locals.users){ %>
                     <div class="elem-name-fst">Nazwa</div>
-                    <div class="elem-desc-fst">Hash hasła</div>
+                    <div class="elem-desc-fst">E-mail</div>
                 <% }else{ %>
                     <div class="elem-name-fst">Numer</div>
                     <div class="elem-desc-fst">Nazwa</div>
@@ -37,7 +37,7 @@
             <% locals.data.forEach(element => {%>
                 <div class="cart-item">
                     <div class="elem-name"><%= element.username %></div>
-                    <div class="elem-desc"><%= element.pwdHash %></div>
+                    <div class="elem-desc"><%= element.email %></div>
                 </div>
             <% }); %>
             <% }else if(locals.data){ %>
