@@ -39,6 +39,10 @@ Admin.getByUsername = function (username, result) {
       result(err, null);
       return;
     }
+    if (!res) {
+      result(new Error("Admin username not found in database"), null);
+      return;
+    }
     result(null, res);
   });
 };
