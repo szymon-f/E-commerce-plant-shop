@@ -88,8 +88,10 @@ INSERT INTO productProperties (productID, propertyName, propertyValue) VALUES (3
 INSERT INTO productProperties (productID, propertyName, propertyValue) VALUES (3, 'wysokość', '1.27');
 INSERT INTO productProperties (productID, propertyName, propertyValue) VALUES (3, 'pojemnosc', '1.2');
 
-INSERT INTO users (username, email, passwordHash) VALUES ('user', 'user@gmail.com', 'user');
-INSERT INTO admins (username, passwordHash) VALUES ('admin', 'admin');
+-- user login and password: user
+-- admin login and password: admin
+INSERT INTO users (username, email, passwordHash) VALUES ('user', 'user@gmail.com', '$2b$10$Gx51k1WupfCIjFNXbPNKL.KZDt20PBYjw8DbhTMsaBYJe67wnfYsC');
+INSERT INTO admins (username, passwordHash) VALUES ('admin', '$2b$10$g3BXkRlYYpDTM9IMOQFZX.eXM6rWQZmTVO0KC5dkxxeDECPvbQDiO');
 INSERT INTO customerOrders (userID, orderDate, orderStatus) VALUES ((select userID from users limit 1), ('2023-12-20 21:22:44'), 'pending');
 
 INSERT INTO orderProducts (orderID, productID, quantity) VALUES ((select orderID from customerOrders limit 1), 1, 3);
