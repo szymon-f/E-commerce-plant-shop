@@ -1,6 +1,5 @@
 function cartControllerGet(req, res) {
-    console.log(req.session.cart)
-    res.render('cart', {items: req.session.cart})
+    res.render('cart', {items: req.session.user.cart})
 }
 
 module.exports ={ cartControllerGet}

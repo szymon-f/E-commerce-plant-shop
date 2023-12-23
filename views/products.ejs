@@ -26,8 +26,8 @@
                 <button type="submit">Wyszukaj</button>
             </form>
             <div class="user-actions">
-              <% if(locals.logged){ %>
-                <div class="user-tile"> Witaj, nazwa!</div>
+              <% if(locals.user.logged){ %>
+                <div class="user-tile"> Witaj, <%= locals.user.username %>!</div>
                 <button class="logout-button">Wyloguj</button>
               <% }else{ %>
                 <form class="redirect" action="/login" method="GET"><button>Zaloguj</button></form>
@@ -35,7 +35,7 @@
               <% } %>
             </div>
             <div class="cart">
-              <% if(locals.logged){ %>
+              <% if(locals.user.logged){ %>
                 <form class="redirect" action="/cart" method="GET">
                   <button>
                   <i class="fa fa-shopping-cart" style="font-size:36px"></i>
@@ -62,7 +62,9 @@
                       </div>
                       <div class="product-price-btn">
                         <p><span><%= data[item].price %></span>zł</p>
-                        <button class="save-button" product-id="<%= data[item].id %>" product-name="<%= data[item].name %>" product-description="<%= data[item].description %>" product-price="<%= data[item].price %>">Dodaj do koszyka</button>
+                        <% if(locals.user.logged){ %>
+                          <button class="save-button" product-id="<%= data[item].id %>" product-name="<%= data[item].name %>" product-description="<%= data[item].description %>" product-price="<%= data[item].price %>">Dodaj do koszyka</button>
+                        <% } %>
                       </div>
                     </div>
                   </div>

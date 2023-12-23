@@ -8,7 +8,7 @@ function loginControllerGet(req, res) {
 
 function loginControllerPost(req, res) {
     if(userAuthenticated()){
-        req.session.logged = true
+        req.session.user = {logged: true, cart: [], username: req.body.username}
         res.redirect('products')
     }else{
         req.flash('badLogin', 'Wprowadzone dane są niepoprawne, sprawdź login oraz hasło')
