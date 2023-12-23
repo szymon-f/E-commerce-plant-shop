@@ -56,8 +56,21 @@ User.getByUsername = (username, result) => {
   });
 };
 
+User.getByID = (userID, result) => {
+  const query = "SELECT * FROM users WHERE userID=?;";
+  const params = [userID];
+  db.get(query, params, function (err, row) {
+    if (err) {
+      console.error("Failed to retrieve user by ID: ", err.message);
+      result(err, null);
+      return;
+    }
+    result(null, row);
+  });
+};
+
 User.deleteByID = (userID, result) => {
-  const query = "DELETE FROM USERS where userID=?;";
+  const query = "DELETE FROM users where userID=?;";
   const params = [userID];
   db.run(query, params, function (err, row) {
     if (err) {
