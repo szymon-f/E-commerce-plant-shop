@@ -52,6 +52,10 @@ User.getByUsername = (username, result) => {
       result(err, null);
       return;
     }
+    if (!row) {
+      result(new Error("Username not found in database"), null);
+      return;
+    }
     result(null, row);
   });
 };
@@ -63,6 +67,10 @@ User.getByID = (userID, result) => {
     if (err) {
       console.error("Failed to retrieve user by ID: ", err.message);
       result(err, null);
+      return;
+    }
+    if (!row){
+      result(new Error("User ID not found in database"), null);
       return;
     }
     result(null, row);
