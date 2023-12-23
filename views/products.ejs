@@ -65,7 +65,8 @@
                         <p><%= data[item].description %></p>
                       </div>
                       <div class="product-price-btn">
-                        <p><span><%= data[item].price %></span>zł</p>
+                        <% let price = data[item].price.toString() %>
+                        <p><span><%= price.slice(0, price.length - 2) + ',' + price.slice(price.length - 2, price.length) %></span>zł</p>
                         <% if(locals.user){ %>
                           <button class="save-button" product-id="<%= data[item].id %>" product-name="<%= data[item].name %>" product-description="<%= data[item].description %>" product-price="<%= data[item].price %>">Dodaj do koszyka</button>
                         <% } %>
