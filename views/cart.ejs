@@ -7,6 +7,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&family=Merienda:wght@400;700&family=Tenor+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="stylesheets/global.css">
     <link rel="stylesheet" href="stylesheets/cart.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="scripts/fadeOutAlert.js"></script>
 </head>
 <body>
     <% let priceSum = 0 %>
@@ -36,5 +38,8 @@
         </form>
         </div>
     </div> 
+    <% if (locals.messages.paid) { %>
+        <div class="custom-alert"><%= locals.messages.paid %></div>
+    <% } %>
 </body>
 </html>
