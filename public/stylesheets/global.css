@@ -66,3 +66,7 @@ h1 {
     cursor: pointer;
     outline: none;
 }
+
+.register-button{
+    width: 200px;
+  }
