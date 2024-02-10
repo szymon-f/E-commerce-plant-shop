@@ -27,11 +27,13 @@
                 <div class="cart-item">
                     <div class="elem-name"><%= element.productName %></div>
                     <div class="elem-desc"><%= element.productDescription %></div>
-                    <div class="elem-price"><%= element.productPrice %></div>
+                    
+                    <div class="elem-price"><%= element.productPrice.slice(0, element.productPrice.length - 2) + ',' + element.productPrice.slice(element.productPrice.length - 2, element.productPrice.length) %></div>
                 </div>
             <% }); %>
-            <% } %>
-        <div class="summary">W sumie do zapłaty: <%= priceSum %> zł</div>
+            <% } %> <!-- priceSum.slice(0, priceSum.length - 2) + ',' + priceSum.slice(priceSum.length - 2, priceSum.length)-->
+            <% priceSum = priceSum.toString() %>
+        <div class="summary">W sumie do zapłaty: <%= priceSum.slice(0, priceSum.length - 2) + ',' + priceSum.slice(priceSum.length - 2, priceSum.length) %> zł</div>
         <form action="/cart" method="POST">
             <input type="hidden" name="cart-items" value="<%= JSON.stringify(locals.items) %>">
             <button class="form-button">Zapłać</button>
